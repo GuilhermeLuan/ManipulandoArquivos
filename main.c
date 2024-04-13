@@ -9,10 +9,12 @@ typedef struct aluno {
     float nota1;
     float nota2;
     float media;
+    char situacao[100];
 } Aluno;
 
 void lerArquivo(char *nomeArquivo, Aluno *listaAlunos);
 void determinarMedia(Aluno *listaAlunos, int tamanhoArray);
+void determinarSituacao(Aluno *listaAlunos, int tamanhoArray);
 
 int main() {
     Aluno listaAlunos[MAX_LEN];
@@ -20,9 +22,13 @@ int main() {
 
     lerArquivo("DadosEntrada.csv", listaAlunos);
     determinarMedia(listaAlunos, tamanhoArray);
+    determinarSituacao(listaAlunos, tamanhoArray);
+
+
 
     for (int i = 0; i < tamanhoArray; ++i) {
-        printf("%s\n Media: %.2f\n", listaAlunos[i].nome, listaAlunos[i].media);
+        printf("%s %.2f %s", listaAlunos[i].nome, listaAlunos[i].media, listaAlunos[i].situacao);
+        printf("\n");
     }
 
     return 0;
@@ -31,6 +37,13 @@ int main() {
 void determinarMedia(Aluno *listaAlunos, int tamanhoArray){
     for (int i = 0; i < tamanhoArray; ++i) {
         listaAlunos[i].media = (listaAlunos[i].nota1 + listaAlunos[i].nota2) / 2;
+    }
+}
+
+void determinarSituacao(Aluno *listaAlunos, int tamanhoArray){
+    for (int i = 0; i < tamanhoArray; ++i) {
+        if(listaAlunos[i].media >= 7) strcpy(listaAlunos[i].situacao, "APROVADO");
+        else strcpy(listaAlunos[i].situacao, "REPROVADO");
     }
 }
 
