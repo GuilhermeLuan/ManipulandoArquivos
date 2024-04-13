@@ -12,17 +12,26 @@ typedef struct aluno {
 } Aluno;
 
 void lerArquivo(char *nomeArquivo, Aluno *listaAlunos);
+void determinarMedia(Aluno *listaAlunos, int tamanhoArray);
 
 int main() {
     Aluno listaAlunos[MAX_LEN];
-    lerArquivo("DadosEntrada.csv", listaAlunos);
     int tamanhoArray = sizeof(listaAlunos) / sizeof(listaAlunos[0]);
 
+    lerArquivo("DadosEntrada.csv", listaAlunos);
+    determinarMedia(listaAlunos, tamanhoArray);
+
     for (int i = 0; i < tamanhoArray; ++i) {
-        printf("%s %.2f %.2f\n", listaAlunos[i].nome, listaAlunos[i].nota1, listaAlunos[i].nota2);
+        printf("%s\n Media: %.2f\n", listaAlunos[i].nome, listaAlunos[i].media);
     }
 
     return 0;
+}
+
+void determinarMedia(Aluno *listaAlunos, int tamanhoArray){
+    for (int i = 0; i < tamanhoArray; ++i) {
+        listaAlunos[i].media = (listaAlunos[i].nota1 + listaAlunos[i].nota2) / 2;
+    }
 }
 
 void lerArquivo(char *nomeArquivo, Aluno *listaAlunos) {
