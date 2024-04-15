@@ -40,7 +40,7 @@ void gerarArquivo(char *nomeArquivo, Aluno *listaAlunos, int tamanhoArray){
     }
 
     for (int i = 0; i < tamanhoArray; ++i){
-        fprintf(f,"%s %.2f %s", listaAlunos[i].nome, listaAlunos[i].media, listaAlunos[i].situacao);
+        fprintf(f,"%s, %.2f, %s", listaAlunos[i].nome, listaAlunos[i].media, listaAlunos[i].situacao);
         fprintf(f,"\n");
     }
     fclose(f);
